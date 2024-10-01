@@ -12,10 +12,13 @@ import javax.swing.JPanel;
 public class GraphicsPanel extends JPanel {
 
     private List<Particle> particles;
+    private Thread drawThread;
 
     public GraphicsPanel(){
         particles = new ArrayList<>();
         particles.add(new Particle(50, 50, 10, 10));
+        drawThread = new Thread(new UpdateLoop());
+        drawThread.start();
     }
 
     public static void main(String[] args) {
@@ -32,5 +35,27 @@ public class GraphicsPanel extends JPanel {
         for (Particle p : particles){
             p.draw(g);
         }
+    }
+
+    private class UpdateLoop implements Runnable {
+
+        @Override
+        public void run() {
+            long startTime = 0, endTime = 0;
+            float deltaTime = 0;
+            
+            while (drawThread != null){
+
+                startTime = System.currentTimeMillis();
+                repaint();
+                endTime = System.currentTimeMillis();
+                deltaTime = endTime-startTime*0.001f;
+                for (Particle p : particles){
+                    p.update(deltaTime);
+                }
+
+            }
+        }
+
     }
 }
