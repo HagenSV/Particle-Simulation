@@ -17,6 +17,7 @@ public class GraphicsPanel extends JPanel {
     public GraphicsPanel(){
         particles = new ArrayList<>();
         particles.add(new Particle(50, 50, 10, 10));
+        particles.get(0).velocity = new Vector2d(100,60);
         drawThread = new Thread(new UpdateLoop());
         drawThread.start();
     }
@@ -49,13 +50,19 @@ public class GraphicsPanel extends JPanel {
                 startTime = System.currentTimeMillis();
                 repaint();
                 endTime = System.currentTimeMillis();
-                deltaTime = endTime-startTime*0.001f;
+                deltaTime = (endTime-startTime)*0.001f;
                 for (Particle p : particles){
                     p.update(deltaTime);
-                }
 
+                    //Update position
+                    if (p.position.x-p.radius < 0 || p.position.x+p.radius > getWidth()){
+                        p.velocity = new Vector2d(-p.velocity.x,p.velocity.y);
+                    }
+                    if (p.position.y-p.radius < 0 || p.position.y+p.radius > getHeight()){
+                        p.velocity = new Vector2d(p.velocity.x,-p.velocity.y);
+                    }
+                }
             }
         }
-
     }
 }
