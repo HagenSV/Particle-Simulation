@@ -1,6 +1,6 @@
 public class Vector2d {
-    float x;
-    float y;
+    public final float x;
+    public final float y;
 
     public Vector2d(){
         x = 0;
