@@ -4,25 +4,21 @@ public class Particle {
 
     private float mass;
     private float radius;
-    private float x;
-    private float y;
-    private float velX;
-    private float velY;
+    private Vector2d position;
+    private Vector2d velocity;
 
     public Particle(float x, float y, float radius, float mass){
-        this.x = x;
-        this.y = y;
+        this.position = new Vector2d(x, y);
         this.radius = radius;
         this.mass = mass;
     }
 
 
     public void update(float dt){
-        this.x += velX*dt;
-        this.y += velY*dt;
+        this.position = this.position.add(velocity.multiply(dt));
     }
 
     public void draw(Graphics g){
-        g.fillOval((int)(x-radius), (int)(y-radius), (int)(radius*2), (int)(radius*2));
+        g.fillOval((int)(position.x-radius), (int)(position.y-radius), (int)(radius*2), (int)(radius*2));
     }
 }
