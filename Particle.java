@@ -2,7 +2,7 @@ import java.awt.Graphics;
 
 public class Particle {
 
-    private float mass;
+    public final float mass;
     public final float radius;
     public Vector2d position;
     public Vector2d velocity;
