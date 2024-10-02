@@ -63,21 +63,21 @@ public class GraphicsPanel extends JPanel {
                     p.update(deltaTime);
 
                     //Update position
-                    if (p.position.x-p.radius < 0){
-                        p.velocity = new Vector2d(-p.velocity.x,p.velocity.y);
-                        p.position = new Vector2d(p.radius,p.position.y);
+                    if (p.position.getX()-p.radius < 0){
+                        p.velocity.setX(-p.velocity.getX());
+                        p.position.setX(p.radius);
                     }
-                    if (p.position.y-p.radius < 0){
-                        p.velocity = new Vector2d(p.velocity.x,-p.velocity.y);
-                        p.position = new Vector2d(p.position.x,p.radius);
+                    if (p.position.getY()-p.radius < 0){
+                        p.velocity.setY(-p.velocity.getY());
+                        p.position.setY(p.radius);
                     }
-                    if (p.position.x+p.radius > getWidth()){
-                        p.velocity = new Vector2d(-p.velocity.x,p.velocity.y);
-                        p.position = new Vector2d(getWidth()-p.radius,p.position.y);
+                    if (p.position.getX()+p.radius > getWidth()){
+                        p.velocity.setX(-p.velocity.getX());
+                        p.position.setX(getWidth()-p.radius);
                     }
-                    if (p.position.y+p.radius > getHeight()){
-                        p.velocity = new Vector2d(p.velocity.x,-p.velocity.y);
-                        p.position = new Vector2d(p.position.x,getHeight()-p.radius);
+                    if (p.position.getY()+p.radius > getHeight()){
+                        p.velocity.setY(-p.velocity.getY());
+                        p.position.setY(getHeight()-p.radius);
                     }
                 }
             }

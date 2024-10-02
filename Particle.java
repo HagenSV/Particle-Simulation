@@ -15,10 +15,12 @@ public class Particle {
     }
 
     public void update(float dt){
-        this.position = this.position.add(velocity.multiply(dt));
+        Vector2d addVec = velocity.copy();
+        addVec.multiply(dt);
+        this.position.add(addVec);
     }
 
     public void draw(Graphics g){
-        g.fillOval((int)(position.x-radius), (int)(position.y-radius), (int)(radius*2), (int)(radius*2));
+        g.fillOval((int)(position.getX()-radius), (int)(position.getY()-radius), (int)(radius*2), (int)(radius*2));
     }
 }
